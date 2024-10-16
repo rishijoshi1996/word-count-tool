@@ -10,7 +10,7 @@ public class WordCountToolService {
 
 	public Map<String, Integer> wordCountMapService(String sentence) {
 
-		String[] sentenceSplit = sentence.split(" ");
+		String[] sentenceSplit = sanitizeSentence(sentence).split(" ");
 
 		Map<String, Integer> wordCountMap = new HashMap<>();
 
@@ -22,5 +22,9 @@ public class WordCountToolService {
 			}
 		}
 		return wordCountMap;
+	}
+
+	private String sanitizeSentence(String sentence) {
+		return sentence.replaceAll("[^a-zA-Z0-9\\s]", "").replaceAll("\\r?\\n", " ");
 	}
 }
